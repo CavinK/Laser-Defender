@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy Stats")]
     [SerializeField] float health = 100;
-    [SerializeField] float shotCounter;
+    [SerializeField] int scoreValue = 150;
+
+    [Header("Shooting")]
+    float shotCounter;
     [SerializeField] float minTimeBetweenShots = .2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileSpeed = 10f;
+
+    [Header("Sound Effects")]
     [SerializeField] GameObject explodeVFX;
     [SerializeField] float durationOfExplosion = 1f;
     [SerializeField] AudioClip explodeSound;
@@ -66,6 +72,9 @@ public class Enemy : MonoBehaviour
 
     private void Over()
     {
+        // scores going up
+        FindObjectOfType<GameSession>().AddToScore(scoreValue); // FindObjectOfType: get method from another class
+
         // Visual Effects
         Destroy(gameObject);
         GameObject explosion = Instantiate(explodeVFX, transform.position, transform.rotation);

@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     {
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
-        if (health < 0)
+        if (health <= 0)
         {
             Over();
         }
@@ -63,6 +63,11 @@ public class Player : MonoBehaviour
         FindObjectOfType<Level>().LoadGameOver(); // make the event to make game over
         Destroy(gameObject);
         AudioSource.PlayClipAtPoint(explodeSound, Camera.main.transform.position, explodeSoundVolume);
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 
     //IEnumerator PrintAndWait() // method for co-routine
